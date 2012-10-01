@@ -1,117 +1,4 @@
-# Checks that the Grand Slam singles performance of professional tennis players on
-# Wikipedia matches their win/loss ratios.
-
-import re
-from numpy import *
-
-OUTCOME = ['1R', '2R', '3R', '4R', 'QF', 'SF', 'F', 'W']
-wins = dict(zip(OUTCOME, range(0,8))) # Gives # wins for round attained
-
-# The following functions work together to construct the win-loss record
-
-def totalWins(li):
-    """ Given a list of rounds, return the total number of wins"""
-    W = 0
-    for stage in li:
-        if stage not in wins.keys():
-            continue
-        W += wins[stage]
-    return(W)
-
-def totalLosses(li):
-    """ Given a list of rounds, return the total number of losses"""
-    L = 0
-    for stage in li:
-        if stage == 'W':
-            continue
-        else:
-            L += 1
-    return(L)
-
-def winLoss(li):
-    """ Given a list of rounds, return win and loss Record"""
-    WL = str(totalWins(li)) + '-' + str(totalLosses(li))
-    return(WL)
-
-##### Build list of slam performance #####
-# The round performance (3R, SF, F, W, etc..) is always the display text of a wiki-link
-# for the individual slam's wiki article.
-# For example, a 3R finish in the 2009 Australian Open will be displayed as:
-# [[2009 Australian Open - Men's Singles|3R]]
-
-performance = re.findall(r"– Men\'s Singles\|\'*([^\]]+)",djok)
-# This will output all instances of display texts of specific slam wiki-links
-
-# Unfortunately, some display text is NOT the round performance, so remove those with the
-# following:
-i = 0
-while i < len(performance):
-    if len(performance[i]) > 2:
-        performance.remove(performance[i])
-    else:
-        i += 1
-del i
-
-# Add in empty strings for yet to be played slams in current year
-
-UNPLAYED = 4 - len(performance) % 4
-i = 0
-while i < UNPLAYED:
-    performance.append('')
-    i += 1
-del i
-
-# Build array of performances
-
-perfSlamArray = array(performance).reshape(4,len(performance)/4)
-perfYearArray = perfSlamArray.transpose()
-
-# Extract win/loss performance for each slam (AO, RG, W, USO)
-
-slamWL = []
-for arr in perfSlamArray:
-    slamWL.append(winLoss(list(arr)))
-
-yearWL = []
-for arr in perfYearArray:
-    yearWL.append(winLoss(list(arr)))
-
-
-"""
-array methods that i'll need:
-.sum(axis=0) gives you list of column sums
-.min(axis=1) gives you mins of rows
-.cumsum(axis=1) gives you cumulative sum along each row
-
-.transpose() gives you transpose
-[1] gives you 2nd row as a list, but you can coerce into a list using list()
-
-.ravel unravels the array/flattens the array
-"""
-
-
-"""
-IDEAS:
-
-1. Build a dict/structure
-    KEYS: AO, FO, W, USO
-    VALUES: [(2005, 2R), (2006, 3R), (2007, F)]
-
-   Extract performance
-    AO Slam perf: List of 2nd tuple value in each dict entry for AO
-    2007 Slam perf: List of second tuple value of first tuple for each key
-
-2. Data Matrix (or list within list)
-     2005 2006 2007 2008
-AO    1R   3R   F    W
-FO
-W               etc..
-USO
-
-   Then, extract.
-   
-"""
-
+# This is the wiki text I am testing for now (from Nole's wiki)
 djok = u"""===Grand Slam tournament performance timeline===
 ''To prevent confusion and double counting, information in this table is updated only once a tournament or the player's participation in the tournament has concluded. This table is current through the [[2012 Wimbledon Championships]].''
 <!--Regarding the italicized note, it just means wait until he loses in the tournament, or until he wins it before updating numbers, so an editor can do it in just one go. and in updating numbers, include the update of tournaments played, finals reached and won, surface win–loss, overall win–loss, and these numbers in the career column, as well as the win–loss in the footnote. -->
@@ -224,4 +111,131 @@ djok = u"""===Grand Slam tournament performance timeline===
 |- style="background:#ebc2af;"
 |bgcolor=FFA07A|Runner-up||[[2012 French Open – Men's Singles|2012]]||[[French Open]] <small>(1)||Clay||{{flagicon|ESP}} Rafael Nadal||4–6, 3–6, 6–2, 5–7
 |}
+"""
+
+#------------------------------------------------------------------------------------#
+#  Checks that the Grand Slam singles performance of professional tennis players on  #
+#  Wikipedia matches their win/loss ratios.                                          #
+#------------------------------------------------------------------------------------#
+
+import re
+from numpy import *
+
+OUTCOME = ['1R', '2R', '3R', '4R', 'QF', 'SF', 'F', 'W']
+wins = dict(zip(OUTCOME, range(0,8))) # Gives # wins for round attained
+
+#--------------------------------------------------------------------------#
+#  The following functions work together to construct the win-loss record  #
+#--------------------------------------------------------------------------#
+
+def totalWins(li):
+    """ Given a list of rounds, return the total number of wins"""
+    W = 0
+    for stage in li:
+        if stage not in wins.keys():
+            continue
+        W += wins[stage]
+    return(W)
+
+def totalLosses(li):
+    """ Given a list of rounds, return the total number of losses"""
+    L = 0
+    for stage in li:
+        if stage == 'W':
+            continue
+        else:
+            L += 1
+    return(L)
+
+def winLoss(li):
+    """ Given a list of rounds, return win and loss Record"""
+    WL = str(totalWins(li)) + '-' + str(totalLosses(li))
+    return(WL)
+
+#----------------------------------#
+#  Build list of slam performance  #
+#----------------------------------#
+# The round performance (3R, SF, F, W, etc..) is always the display text of a wiki-link
+# for the individual slam's wiki article.
+# For example, a 3R finish in the 2009 Australian Open will be displayed as:
+# [[2009 Australian Open - Men's Singles|3R]]
+
+performance = re.findall(r"– Men\'s Singles\|\'*([^\]]+)",djok)
+# This will output all instances of display texts of specific slam wiki-links
+
+# Unfortunately, some display text is NOT the round performance, so remove all display text
+# with more than 2 characters here: (should get rid of all our problems)
+i = 0
+while i < len(performance):
+    if len(performance[i]) > 2:
+        performance.remove(performance[i])
+    else:
+        i += 1
+del i
+
+# Add in empty strings for yet to be played slams in current year
+
+UNPLAYED = 4 - len(performance) % 4
+i = 0
+while i < UNPLAYED:
+    performance.append('')
+    i += 1
+del i
+
+#-------------------------------#
+#  Build array of performances  #
+#-------------------------------#
+
+perfSlamArray = array(performance).reshape(4,len(performance)/4)
+# This is the grand slam performance table we can visually see on Wikipedia
+
+perfYearArray = perfSlamArray.transpose()
+# Same thing but transposed
+
+#---------------------------------------------------------------#
+#  Extract win/loss performance for each slam (AO, RG, W, USO)  #
+#---------------------------------------------------------------#
+
+slamWL = []
+for arr in perfSlamArray:
+    slamWL.append(winLoss(list(arr)))
+
+yearWL = []
+for arr in perfYearArray:
+    yearWL.append(winLoss(list(arr)))
+
+
+"""
+array methods that i'll need:
+.sum(axis=0) gives you list of column sums
+.min(axis=1) gives you mins of rows
+.cumsum(axis=1) gives you cumulative sum along each row
+
+.transpose() gives you transpose
+[1] gives you 2nd row as a list, but you can coerce into a list using list()
+
+.ravel unravels the array/flattens the array
+"""
+
+
+"""
+IDEAS:
+
+1. Build a dict/structure
+    KEYS: AO, FO, W, USO
+    VALUES: [(2005, 2R), (2006, 3R), (2007, F)]
+
+   Extract performance
+    AO Slam perf: List of 2nd tuple value in each dict entry for AO
+    2007 Slam perf: List of second tuple value of first tuple for each key
+
+2. Data Matrix (or list within list)
+     2005 2006 2007 2008
+AO    1R   3R   F    W
+FO
+W               etc..
+USO
+
+   Then, extract.
+   
 """
