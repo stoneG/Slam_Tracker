@@ -152,6 +152,11 @@ def winLoss(li):
     WL = str(totalWins(li)) + '-' + str(totalLosses(li))
     return(WL)
 
+def winLossPct(li):
+    """ Given a list of rounds, return win and loss percentage"""
+    WL = totalWins(li) / (float(totalWins(li)) + totalLosses(li))
+    return(round(WL*100,2))
+
 #----------------------------------#
 #  Build list of slam performance  #
 #----------------------------------#
