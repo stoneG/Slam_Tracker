@@ -1,7 +1,8 @@
 # Checks that the Grand Slam singles performance of professional tennis players on
 # Wikipedia matches their win/loss ratios.
 
-import re, numpy
+import re
+from numpy import *
 
 OUTCOME = ['1R', '2R', '3R', '4R', 'QF', 'SF', 'F', 'W']
 wins = dict(zip(OUTCOME, range(0,8))) # Gives # wins for round attained
@@ -32,9 +33,17 @@ def winLoss(li):
     WL = str(totalWins(li)) + '-' + str(totalLosses(li))
     return(WL)
 
-# Build list of slam performance
+##### Build list of slam performance #####
+# The round performance (3R, SF, F, W, etc..) is always the display text of a wiki-link
+# for the individual slam's wiki article.
+# For example, a 3R finish in the 2009 Australian Open will be displayed as:
+# [[2009 Australian Open - Men's Singles|3R]]
 
 performance = re.findall(r"– Men\'s Singles\|\'*([^\]]+)",djok)
+# This will output all instances of display texts of specific slam wiki-links
+
+# Unfortunately, some display text is NOT the round performance, so remove those with the
+# following:
 i = 0
 while i < len(performance):
     if len(performance[i]) > 2:
@@ -43,7 +52,7 @@ while i < len(performance):
         i += 1
 del i
 
-# Add in emtpy strings for yet to be played slams in current year
+# Add in empty strings for yet to be played slams in current year
 
 UNPLAYED = 4 - len(performance) % 4
 i = 0
