@@ -189,7 +189,7 @@ def winLossPct(li):
     WL = round(WL * 100, 2)
     return(trailingZeroes(WL,2))
 
-def slamWinLoss(li):
+def slamWinRec(li):
     """ Given a list of rounds, return slam win-loss record"""
     W = 0
     total = 0
@@ -259,7 +259,7 @@ for arr in perfSlamArray:
 
 slamRec = []
 for arr in perfSlamArray:
-    slamRec.append(slamWins(list(arr)))
+    slamRec.append(slamWinRec(list(arr)))
 
 #-------------------------------------------------------------------------#
 #  Extract win/loss aggregate performance for each slam (AO, RG, W, USO)  #
@@ -270,7 +270,7 @@ W = T = 0
 for arr in perfSlamArray:
     W += slamWins(list(arr))
     T += slamWins(list(arr)) + slamLosses(list(arr))
-slamRec_Total = str(W) + '-' + str(T)
+slamRec_Total = str(W) + ' / ' + str(T)
 del W, T
 
 # W-L total (note that W and L are used in next total too)
