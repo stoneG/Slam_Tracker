@@ -1,4 +1,121 @@
-# This is the wiki text I am testing for now (from Nole's wiki)
+# This is the wiki text I am testing for now
+arod = u"""===Grand Slam tournament performance timeline===
+{{Main|Andy Roddick career statistics}}
+
+{|class=wikitable style=text-align:center;font-size:97%
+|-
+!Tournament!!2000!!2001!!2002!!2003!!2004!!2005!!2006 !!2007!!2008!!2009!!2010!!2011!!2012!!|SR!!W–L
+|-
+|colspan=16 align=left|'''Grand Slam tournaments
+|-
+|align=left|[[Australian Open]]
+|A
+|A
+|bgcolor=#afeeee|[[2002 Australian Open – Men's Singles|2R]]
+|bgcolor=yellow|[[2003 Australian Open – Men's Singles|SF]]
+|bgcolor=#ffebcd|[[2004 Australian Open – Men's Singles|QF]]
+|bgcolor=yellow|[[2005 Australian Open – Men's Singles|SF]]
+|bgcolor=#afeeee|[[2006 Australian Open – Men's Singles|4R]]
+|bgcolor=yellow|[[2007 Australian Open – Men's Singles|SF]]
+|bgcolor=#afeeee|[[2008 Australian Open – Men's Singles|3R]]
+|bgcolor=yellow|[[2009 Australian Open – Men's Singles|SF]]
+|bgcolor=#ffebcd|[[2010 Australian Open – Men's Singles|QF]]
+|bgcolor=#afeeee|[[2011 Australian Open – Men's Singles|4R]]
+|bgcolor=#afeeee|[[2012 Australian Open – Men's Singles|2R]]
+|0 / 11
+|38–11
+|-
+|align=left|[[French Open]]
+|A
+|bgcolor=#afeeee|[[2001 French Open – Men's Singles|3R]]
+|bgcolor=#afeeee|[[2002 French Open – Men's Singles|1R]]
+|bgcolor=#afeeee|[[2003 French Open – Men's Singles|1R]]
+|bgcolor=#afeeee|[[2004 French Open – Men's Singles|2R]]
+|bgcolor=#afeeee|[[2005 French Open – Men's Singles|2R]]
+|bgcolor=#afeeee|[[2006 French Open – Men's Singles|1R]]
+|bgcolor=#afeeee|[[2007 French Open – Men's Singles|1R]]
+|A
+|bgcolor=#afeeee|[[2009 French Open – Men's Singles|4R]]
+|bgcolor=#afeeee|[[2010 French Open – Men's Singles|3R]]
+|A
+|bgcolor=#afeeee|[[2012 French Open – Men's Singles|1R]]
+|0 / 10
+|9–10
+|-
+|align=left|[[The Championships, Wimbledon|Wimbledon]]
+|A
+|bgcolor=#afeeee|[[2001 Wimbledon Championships – Men's Singles|3R]]
+|bgcolor=#afeeee|[[2002 Wimbledon Championships – Men's Singles|3R]]
+|bgcolor=yellow|[[2003 Wimbledon Championships – Men's Singles|SF]]
+|bgcolor=thistle|[[2004 Wimbledon Championships – Men's Singles|F]]
+|bgcolor=thistle|[[2005 Wimbledon Championships – Men's Singles|F]]
+|bgcolor=#afeeee|[[2006 Wimbledon Championships – Men's Singles|3R]]
+|bgcolor=#ffebcd|[[2007 Wimbledon Championships – Men's Singles|QF]]
+|bgcolor=#afeeee|[[2008 Wimbledon Championships – Men's Singles|2R]]
+|bgcolor=thistle|[[2009 Wimbledon Championships – Men's Singles|F]]
+|bgcolor=#afeeee|[[2010 Wimbledon Championships – Men's Singles|4R]]
+|bgcolor=#afeeee|[[2011 Wimbledon Championships – Men's Singles|3R]]
+|bgcolor=#afeeee|[[2012 Wimbledon Championships – Men's Singles|3R]]
+|0 / 12
+|41–12
+|-
+|align=left|[[US Open (tennis)|US Open]]
+|bgcolor=#afeeee|[[2000 US Open – Men's Singles|1R]]
+|bgcolor=#ffebcd|[[2001 US Open – Men's Singles|QF]]
+|bgcolor=#ffebcd|[[2002 US Open – Men's Singles|QF]]
+|bgcolor=lime|[[2003 US Open – Men's Singles|'''W]]
+|bgcolor=#ffebcd|[[2004 US Open – Men's Singles|QF]]
+|bgcolor=#afeeee|[[2005 US Open – Men's Singles|1R]]
+|bgcolor=thistle|[[2006 US Open – Men's Singles|F]]
+|bgcolor=#ffebcd|[[2007 US Open – Men's Singles|QF]]
+|bgcolor=#ffebcd|[[2008 US Open – Men's Singles|QF]]
+|bgcolor=#afeeee|[[2009 US Open – Men's Singles|3R]]
+|bgcolor=#afeeee|[[2010 US Open – Men's Singles|2R]]
+|bgcolor=#ffebcd|[[2011 US Open – Men's Singles|QF]]
+|bgcolor=#afeeee|[[2012 US Open – Men's Singles|4R]]
+|1 / 13
+|43–12
+|-
+!style=text-align:left|Win–Loss
+!0–1
+!8–3
+!7–4
+!17–3
+!15–4
+!12–4
+!11–4
+!13–4
+!7–3
+!16–4
+!10–4
+!9–3
+!6–4
+!1 / 46
+!131–45
+|}
+
+;<big>Finals: 5 (1 title, 4 runners-up)</big>
+{|class="sortable wikitable" style=font-size:97%
+!Outcome
+!Year
+!width=200|Championship
+!Surface
+!width=200|Opponent
+!width=200|Score
+|-bgcolor=#CCCCFF
+|bgcolor=#98fb98|Winner||2003||[[US Open (tennis)|US Open]]||Hard||{{flagicon|Spain}} [[Juan Carlos Ferrero]]||6–3, 7–6<sup>(7–2)</sup>, 6–3
+|-bgcolor=#ccffcc
+|bgcolor=#ffa07a|Runner-up||2004||[[The Championships, Wimbledon|Wimbledon]]||Grass||{{flagicon|Switzerland}} [[Roger Federer]]||6–4, 5–7, 6–7<sup>(3–7)</sup>, 4–6
+|-bgcolor=#ccffcc
+|bgcolor=#ffa07a|Runner-up||2005||Wimbledon||Grass||{{flagicon|Switzerland}} Roger Federer||2–6, 6–7<sup>(2–7)</sup>, 4–6
+|-bgcolor=#CCCCFF
+|bgcolor=#ffa07a|Runner-up||2006||US Open||Hard||{{flagicon|Switzerland}} Roger Federer||2–6, 6–4, 5–7, 1–6
+|-bgcolor=#ccffcc
+|bgcolor=#ffa07a|Runner-up||2009||Wimbledon||Grass||{{flagicon|Switzerland}} Roger Federer||7–5, 6–7<sup>(6–8)</sup>, 6–7<sup>(5–7)</sup>, 6–3, 14–16
+|}
+
+"""
+
 djok = u"""===Grand Slam tournament performance timeline===
 ''To prevent confusion and double counting, information in this table is updated only once a tournament or the player's participation in the tournament has concluded. This table is current through the [[2012 Wimbledon Championships]].''
 <!--Regarding the italicized note, it just means wait until he loses in the tournament, or until he wins it before updating numbers, so an editor can do it in just one go. and in updating numbers, include the update of tournaments played, finals reached and won, surface win–loss, overall win–loss, and these numbers in the career column, as well as the win–loss in the footnote. -->
@@ -153,12 +270,10 @@ def totalWins(li):
     return(W)
 
 def totalLosses(li):
-    """ Given a list of rounds, return the total number of losses"""
+    """ Given a list of rounds, return slam losses"""
     L = 0
     for stage in li:
-        if stage == 'W':
-            continue
-        else:
+        if stage != 'W' and stage in OUTCOME:
             L += 1
     return(L)
 
@@ -169,14 +284,6 @@ def slamWins(li):
         if stage == 'W':
             W += 1
     return(W)
-
-def slamLosses(li):
-    """ Given a list of rounds, return slam losses"""
-    L = 0
-    for stage in li:
-        if stage != 'W':
-            L += 1
-    return(L)
 
 def winLoss(li):
     """ Given a list of rounds, return win-loss record"""
@@ -211,7 +318,13 @@ def slamWinRec(li):
 # [[2009 Australian Open - Men's Singles|3R]]
 
 # Builds a list of all instances of display texts of specific slam wiki-links
-performance = re.findall(r"– Men\'s Singles\|\'*([^\]]+)",djok)
+perf = re.findall(r"\n\|([A-Z]\w*)|– Men\'s Singles\|\'*([^\]]+)", arod)
+performance = []
+for tup in perf:
+    for string in tup:
+        if string:
+            performance.append(string)
+del perf
 
 # Unfortunately, some display text is NOT the round performance,
 # so remove all display text with more than 2 characters here:
@@ -225,7 +338,10 @@ while i < len(performance):
 del i
 
 # Add in empty strings for yet to be played slams in current year
-UNPLAYED = 4 - len(performance) % 4
+if len(performance) % 4:
+    UNPLAYED = 4 - len(performance) % 4
+else:
+    UNPLAYED = 0
 i = 0
 while i < UNPLAYED:
     performance.append('')
@@ -269,7 +385,7 @@ for arr in perfSlamArray:
 W = T = 0
 for arr in perfSlamArray:
     W += slamWins(list(arr))
-    T += slamWins(list(arr)) + slamLosses(list(arr))
+    T += slamWins(list(arr)) + totalLosses(list(arr))
 slamRec_Total = str(W) + ' / ' + str(T)
 del W, T
 
