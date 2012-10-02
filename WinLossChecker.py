@@ -111,18 +111,33 @@ djok = u"""===Grand Slam tournament performance timeline===
 |- style="background:#ebc2af;"
 |bgcolor=FFA07A|Runner-up||[[2012 French Open – Men's Singles|2012]]||[[French Open]] <small>(1)||Clay||{{flagicon|ESP}} Rafael Nadal||4–6, 3–6, 6–2, 5–7
 |}
+
 """
 
-#------------------------------------------------------------------------------------#
-#  Checks that the Grand Slam singles performance of professional tennis players on  #
-#  Wikipedia matches their win/loss ratios.                                          #
-#------------------------------------------------------------------------------------#
+#-------------------------------------------------------#
+#  Function for Trailing Zeroes (need for percentages)  #
+#-------------------------------------------------------#
+
+def trailingZeroes(flt, NumOfDecimalPlaces = 0):
+    n = len(str(flt))
+    i = 1
+    for char in str(flt):
+        if char == '.':
+            break
+        else:
+            i += 1
+    return(str(flt) + '0' * (NumOfDecimalPlaces - n + i))
+
+#---------------------------------------------------------------------------#
+#  Checks that the Grand Slam singles performance of                        #
+#  professional tennis players on Wikipedia matches their win/loss ratios.  #                               #
+#---------------------------------------------------------------------------#
 
 import re
 from numpy import *
 
 OUTCOME = ['1R', '2R', '3R', '4R', 'QF', 'SF', 'F', 'W']
-wins = dict(zip(OUTCOME, range(0,8))) # Gives # wins for round attained
+wins = dict(zip(OUTCOME, range(0,8))) # Gives num of wins for round attained
 
 #--------------------------------------------------------------------------#
 #  The following functions work together to construct the win-loss record  #
@@ -147,8 +162,24 @@ def totalLosses(li):
             L += 1
     return(L)
 
+def slamWins(li):
+    """ Given a list of rounds, return slam wins"""
+    W = 0
+    for stage in li:
+        if stage == 'W':
+            W += 1
+    return(W)
+
+def slamLosses(li):
+    """ Given a list of rounds, return slam losses"""
+    L = 0
+    for stage in li:
+        if stage != 'W':
+            L += 1
+    return(L)
+
 def winLoss(li):
-    """ Given a list of rounds, return win and loss Record"""
+    """ Given a list of rounds, return win-loss record"""
     WL = str(totalWins(li)) + '-' + str(totalLosses(li))
     return(WL)
 
@@ -156,21 +187,35 @@ def winLossPct(li):
     """ Given a list of rounds, return win and loss percentage"""
     WL = totalWins(li) / (float(totalWins(li)) + totalLosses(li))
     WL = round(WL * 100, 2)
-    return(WL)
+    return(trailingZeroes(WL,2))
+
+def slamWinLoss(li):
+    """ Given a list of rounds, return slam win-loss record"""
+    W = 0
+    total = 0
+    for stage in li:
+        if stage == 'W':
+            W += 1
+        total += 1
+    slamRec = str(W) + ' / ' + str(total)
+    return(slamRec)
+    
 
 #----------------------------------#
 #  Build list of slam performance  #
 #----------------------------------#
+
 # The round performance (3R, SF, F, W, etc..) is always the display text of a wiki-link
 # for the individual slam's wiki article.
 # For example, a 3R finish in the 2009 Australian Open will be displayed as:
 # [[2009 Australian Open - Men's Singles|3R]]
 
+# Builds a list of all instances of display texts of specific slam wiki-links
 performance = re.findall(r"– Men\'s Singles\|\'*([^\]]+)",djok)
-# This will output all instances of display texts of specific slam wiki-links
 
-# Unfortunately, some display text is NOT the round performance, so remove all display text
-# with more than 2 characters here: (should get rid of all our problems)
+# Unfortunately, some display text is NOT the round performance,
+# so remove all display text with more than 2 characters here:
+# (should get rid of all our problems)
 i = 0
 while i < len(performance):
     if len(performance[i]) > 2:
@@ -180,7 +225,6 @@ while i < len(performance):
 del i
 
 # Add in empty strings for yet to be played slams in current year
-
 UNPLAYED = 4 - len(performance) % 4
 i = 0
 while i < UNPLAYED:
@@ -188,16 +232,15 @@ while i < UNPLAYED:
     i += 1
 del i
 
-#-------------------------------#
-#  Build array of performances  #
-#-------------------------------#
+#--------------------------------#
+#  Build arrays of performances  #
+#--------------------------------#
 
-perfSlamArray = array(performance).reshape(4,len(performance)/4)
 # This is the grand slam performance table we can visually see on Wikipedia
+perfSlamArray = array(performance).reshape(4,len(performance)/4)
 
 perfYearArray = perfSlamArray.transpose()
-# Same thing but transposed
-
+    
 #---------------------------------------------------------------#
 #  Extract win/loss performance for each slam (AO, RG, W, USO)  #
 #---------------------------------------------------------------#
@@ -210,6 +253,36 @@ yearWL = []
 for arr in perfYearArray:
     yearWL.append(winLoss(list(arr)))
 
+slamPct = []
+for arr in perfSlamArray:
+    slamPct.append(winLossPct(list(arr)))
+
+slamRec = []
+for arr in perfSlamArray:
+    slamRec.append(slamWins(list(arr)))
+
+#-------------------------------------------------------------------------#
+#  Extract win/loss aggregate performance for each slam (AO, RG, W, USO)  #
+#-------------------------------------------------------------------------#
+
+# SR total
+W = T = 0
+for arr in perfSlamArray:
+    W += slamWins(list(arr))
+    T += slamWins(list(arr)) + slamLosses(list(arr))
+slamRec_Total = str(W) + '-' + str(T)
+del W, T
+
+# W-L total (note that W and L are used in next total too)
+W = L = 0
+for arr in perfSlamArray:
+    W += totalWins(list(arr))
+    L += totalLosses(list(arr))
+slamWL_Total = str(W) + '-' + str(L)
+
+# Win % total (W and L deleted after this total is calculated)
+slamPct_Total = trailingZeroes(round(W / (float(W) + L) * 100, 2), 2)
+del W, L  
 
 """
 array methods that i'll need:
