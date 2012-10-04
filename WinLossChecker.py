@@ -1,250 +1,4 @@
-# This is the wiki text I am testing for now
-arod = u"""===Grand Slam tournament performance timeline===
-{{Main|Andy Roddick career statistics}}
-
-{|class=wikitable style=text-align:center;font-size:97%
-|-
-!Tournament!!2000!!2001!!2002!!2003!!2004!!2005!!2006 !!2007!!2008!!2009!!2010!!2011!!2012!!|SR!!W–L
-|-
-|colspan=16 align=left|'''Grand Slam tournaments
-|-
-|align=left|[[Australian Open]]
-|A
-|A
-|bgcolor=#afeeee|[[2002 Australian Open – Men's Singles|2R]]
-|bgcolor=yellow|[[2003 Australian Open – Men's Singles|SF]]
-|bgcolor=#ffebcd|[[2004 Australian Open – Men's Singles|QF]]
-|bgcolor=yellow|[[2005 Australian Open – Men's Singles|SF]]
-|bgcolor=#afeeee|[[2006 Australian Open – Men's Singles|4R]]
-|bgcolor=yellow|[[2007 Australian Open – Men's Singles|SF]]
-|bgcolor=#afeeee|[[2008 Australian Open – Men's Singles|3R]]
-|bgcolor=yellow|[[2009 Australian Open – Men's Singles|SF]]
-|bgcolor=#ffebcd|[[2010 Australian Open – Men's Singles|QF]]
-|bgcolor=#afeeee|[[2011 Australian Open – Men's Singles|4R]]
-|bgcolor=#afeeee|[[2012 Australian Open – Men's Singles|2R]]
-|0 / 11
-|38–11
-|-
-|align=left|[[French Open]]
-|A
-|bgcolor=#afeeee|[[2001 French Open – Men's Singles|3R]]
-|bgcolor=#afeeee|[[2002 French Open – Men's Singles|1R]]
-|bgcolor=#afeeee|[[2003 French Open – Men's Singles|1R]]
-|bgcolor=#afeeee|[[2004 French Open – Men's Singles|2R]]
-|bgcolor=#afeeee|[[2005 French Open – Men's Singles|2R]]
-|bgcolor=#afeeee|[[2006 French Open – Men's Singles|1R]]
-|bgcolor=#afeeee|[[2007 French Open – Men's Singles|1R]]
-|A
-|bgcolor=#afeeee|[[2009 French Open – Men's Singles|4R]]
-|bgcolor=#afeeee|[[2010 French Open – Men's Singles|3R]]
-|A
-|bgcolor=#afeeee|[[2012 French Open – Men's Singles|1R]]
-|0 / 10
-|9–10
-|-
-|align=left|[[The Championships, Wimbledon|Wimbledon]]
-|A
-|bgcolor=#afeeee|[[2001 Wimbledon Championships – Men's Singles|3R]]
-|bgcolor=#afeeee|[[2002 Wimbledon Championships – Men's Singles|3R]]
-|bgcolor=yellow|[[2003 Wimbledon Championships – Men's Singles|SF]]
-|bgcolor=thistle|[[2004 Wimbledon Championships – Men's Singles|F]]
-|bgcolor=thistle|[[2005 Wimbledon Championships – Men's Singles|F]]
-|bgcolor=#afeeee|[[2006 Wimbledon Championships – Men's Singles|3R]]
-|bgcolor=#ffebcd|[[2007 Wimbledon Championships – Men's Singles|QF]]
-|bgcolor=#afeeee|[[2008 Wimbledon Championships – Men's Singles|2R]]
-|bgcolor=thistle|[[2009 Wimbledon Championships – Men's Singles|F]]
-|bgcolor=#afeeee|[[2010 Wimbledon Championships – Men's Singles|4R]]
-|bgcolor=#afeeee|[[2011 Wimbledon Championships – Men's Singles|3R]]
-|bgcolor=#afeeee|[[2012 Wimbledon Championships – Men's Singles|3R]]
-|0 / 12
-|41–12
-|-
-|align=left|[[US Open (tennis)|US Open]]
-|bgcolor=#afeeee|[[2000 US Open – Men's Singles|1R]]
-|bgcolor=#ffebcd|[[2001 US Open – Men's Singles|QF]]
-|bgcolor=#ffebcd|[[2002 US Open – Men's Singles|QF]]
-|bgcolor=lime|[[2003 US Open – Men's Singles|'''W]]
-|bgcolor=#ffebcd|[[2004 US Open – Men's Singles|QF]]
-|bgcolor=#afeeee|[[2005 US Open – Men's Singles|1R]]
-|bgcolor=thistle|[[2006 US Open – Men's Singles|F]]
-|bgcolor=#ffebcd|[[2007 US Open – Men's Singles|QF]]
-|bgcolor=#ffebcd|[[2008 US Open – Men's Singles|QF]]
-|bgcolor=#afeeee|[[2009 US Open – Men's Singles|3R]]
-|bgcolor=#afeeee|[[2010 US Open – Men's Singles|2R]]
-|bgcolor=#ffebcd|[[2011 US Open – Men's Singles|QF]]
-|bgcolor=#afeeee|[[2012 US Open – Men's Singles|4R]]
-|1 / 13
-|43–12
-|-
-!style=text-align:left|Win–Loss
-!0–1
-!8–3
-!7–4
-!17–3
-!15–4
-!12–4
-!11–4
-!13–4
-!7–3
-!16–4
-!10–4
-!9–3
-!6–4
-!1 / 46
-!131–45
-|}
-
-;<big>Finals: 5 (1 title, 4 runners-up)</big>
-{|class="sortable wikitable" style=font-size:97%
-!Outcome
-!Year
-!width=200|Championship
-!Surface
-!width=200|Opponent
-!width=200|Score
-|-bgcolor=#CCCCFF
-|bgcolor=#98fb98|Winner||2003||[[US Open (tennis)|US Open]]||Hard||{{flagicon|Spain}} [[Juan Carlos Ferrero]]||6–3, 7–6<sup>(7–2)</sup>, 6–3
-|-bgcolor=#ccffcc
-|bgcolor=#ffa07a|Runner-up||2004||[[The Championships, Wimbledon|Wimbledon]]||Grass||{{flagicon|Switzerland}} [[Roger Federer]]||6–4, 5–7, 6–7<sup>(3–7)</sup>, 4–6
-|-bgcolor=#ccffcc
-|bgcolor=#ffa07a|Runner-up||2005||Wimbledon||Grass||{{flagicon|Switzerland}} Roger Federer||2–6, 6–7<sup>(2–7)</sup>, 4–6
-|-bgcolor=#CCCCFF
-|bgcolor=#ffa07a|Runner-up||2006||US Open||Hard||{{flagicon|Switzerland}} Roger Federer||2–6, 6–4, 5–7, 1–6
-|-bgcolor=#ccffcc
-|bgcolor=#ffa07a|Runner-up||2009||Wimbledon||Grass||{{flagicon|Switzerland}} Roger Federer||7–5, 6–7<sup>(6–8)</sup>, 6–7<sup>(5–7)</sup>, 6–3, 14–16
-|}
-
-"""
-
-djok = u"""===Grand Slam tournament performance timeline===
-''To prevent confusion and double counting, information in this table is updated only once a tournament or the player's participation in the tournament has concluded. This table is current through the [[2012 Wimbledon Championships]].''
-<!--Regarding the italicized note, it just means wait until he loses in the tournament, or until he wins it before updating numbers, so an editor can do it in just one go. and in updating numbers, include the update of tournaments played, finals reached and won, surface win–loss, overall win–loss, and these numbers in the career column, as well as the win–loss in the footnote. -->
-
-{|class=wikitable style=text-align:center;font-size:98%
-|-
-!Tournament!![[2003 ATP Tour|2003]]!![[2004 ATP Tour|2004]]!![[2005 ATP Tour|2005]]!![[2006 ATP Tour|2006]]!![[2007 ATP Tour|2007]]!![[2008 ATP Tour|2008]]!![[2009 ATP World Tour|2009]]!![[2010 ATP World Tour|2010]]!![[2011 ATP World Tour|2011]]!![[2012 ATP World Tour|2012]]!!width=50|SR!!width=50|W–L!!width=50|Win %
-|-
-| colspan="14" style="text-align:left;"|'''Grand Slam Tournaments
-|-
-| style="background:#efefef;" text-align:left|Australian Open
-|A
-|A
-| style="background:#afeeee;"|[[2005 Australian Open – Men's Singles|1R]]
-| style="background:#afeeee;"|[[2006 Australian Open – Men's Singles|1R]]
-| style="background:#afeeee;"|[[2007 Australian Open – Men's Singles|4R]]
-|bgcolor=lime|[[2008 Australian Open – Men's Singles|'''W]]
-| style="background:#ffebcd;"|[[2009 Australian Open – Men's Singles|QF]]
-| style="background:#ffebcd;"|[[2010 Australian Open – Men's Singles|QF]]
-|bgcolor=lime|[[2011 Australian Open – Men's Singles|'''W]]
-|bgcolor=lime|[[2012 Australian Open – Men's Singles|'''W]]
-| style="background:#efefef;"|3 / 8
-| style="background:#efefef;"|32–5
-| style="background:#efefef;"|86.49
-|-
-| style="background:#efefef; text-align:left;"|French Open
-|A
-|A
-| style="background:#afeeee;"|[[2005 French Open – Men's Singles|2R]]
-| style="background:#ffebcd;"|[[2006 French Open – Men's Singles|QF]]
-| style="background:yellow;"|[[2007 French Open – Men's Singles|SF]]
-| style="background:yellow;"|[[2008 French Open – Men's Singles|SF]]
-| style="background:#afeeee;"|[[2009 French Open – Men's Singles|3R]]
-| style="background:#ffebcd;"|[[2010 French Open – Men's Singles|QF]]
-| style="background:yellow;"|[[2011 French Open – Men's Singles|SF]]
-| style="background:thistle;"|[[2012 French Open – Men's Singles|F]]
-| style="background:#efefef;"|0 / 8
-| style="background:#efefef;"|31–8
-| style="background:#efefef;"|79.49
-|-
-| style="background:#efefef; text-align:left;"|Wimbledon
-|A
-|A
-| style="background:#afeeee;"|[[2005 Wimbledon Championships – Men's Singles|3R]]
-| style="background:#afeeee;"|[[2006 Wimbledon Championships – Men's Singles|4R]]
-| style="background:yellow;"|[[2007 Wimbledon Championships – Men's Singles|SF]]
-| style="background:#afeeee;"|[[2008 Wimbledon Championships – Men's Singles|2R]]
-| style="background:#ffebcd;"|[[2009 Wimbledon Championships – Men's Singles|QF]]
-| style="background:yellow;"|[[2010 Wimbledon Championships – Men's Singles|SF]]
-|bgcolor=lime|[[2011 Wimbledon Championships – Men's Singles|'''W]]
-| style="background:yellow;"|[[2012 Wimbledon Championships – Men's Singles|SF]]
-| style="background:#efefef;"|1 / 8
-| style="background:#efefef;"|32–7
-| style="background:#efefef;"|82.05
-|-
-| style="background:#efefef; text-align:left;"|US Open
-|A
-|A
-| style="background:#afeeee;"|[[2005 US Open – Men's Singles|3R]]
-| style="background:#afeeee;"|[[2006 US Open – Men's Singles|3R]]
-| style="background:thistle;"|[[2007 US Open – Men's Singles|F]]
-| style="background:yellow;"|[[2008 US Open – Men's Singles|SF]]
-| style="background:yellow;"|[[2009 US Open – Men's Singles|SF]]
-| style="background:thistle;"|[[2010 US Open – Men's Singles|F]]
-|bgcolor=lime|[[2011 US Open – Men's Singles|'''W]]
-|bgcolor=|
-| style="background:#efefef;"|1 / 7
-| style="background:#efefef;"|33–6
-| style="background:#efefef;"|84.62
-|-
-!style=text-align:left|Win–Loss
-!0–0
-!0–0
-!5–4
-!9–4
-!19–4
-!18–3
-!15–4
-!19–4
-!25–1
-!18–2
-!5 / 31
-!128–26
-!83.12
-|}
-
-;<big>Finals: 8 (5 titles, 3 runners-up)</big>
-{|class="sortable wikitable"
-|-
-!width=80|Outcome
-!width=50|Year
-!width=200|Championship
-!width=75|Surface
-!width=200|Opponent in the final
-!width=200|Score in the final
-|- style="background:#ccf;"
-|bgcolor=FFA07A|Runner-up||[[2007 US Open – Men's Singles|2007]]||[[US Open (tennis)|US Open]] <small>(1)||Hard||{{flagicon|SWI}} [[Roger Federer]]||6–7<sup>(4–7)</sup>, 6–7<sup>(2–7)</sup>, 4–6
-|- style="background:#ffc;"
-|bgcolor=98FB98|Winner||[[2008 Australian Open – Men's Singles|2008]]||[[Australian Open]] <small>(1)||Hard||{{flagicon|FRA}} [[Jo-Wilfried Tsonga]]||4–6, 6–4, 6–3, 7–6<sup>(7–2)
-|- style="background:#ccf;"
-|bgcolor=FFA07A|Runner-up||[[2010 US Open – Men's Singles|2010]]||US Open <small>(2)||Hard||{{flagicon|ESP}} [[Rafael Nadal]]||4–6, 7–5, 4–6, 2–6
-|- style="background:#ffc;"
-|bgcolor=98FB98|Winner||[[2011 Australian Open – Men's Singles|2011]]||Australian Open <small>(2)||Hard||{{flagicon|GBR}} [[Andy Murray]]||6–4, 6–2, 6–3
-|- style="background:#cfc;"
-| style="background:#98fb98;"|Winner||[[2011 Wimbledon Championships|2011]] || [[Wimbledon Championships|Wimbledon]] <small>(1)|| Grass ||{{flagicon|ESP}} Rafael Nadal || 6–4, 6–1, 1–6, 6–3
-|- style="background:#ccf;"
-|bgcolor=98FB98|Winner||[[2011 US Open – Men's Singles|2011]]||US Open <small>(1)||Hard||{{flagicon|ESP}} Rafael Nadal||6–2, 6–4, 6–7<sup>(3–7)</sup>, 6–1
-|- style="background:#ffc;"
-|bgcolor=98FB98|Winner||[[2012 Australian Open – Men's Singles|2012]]||Australian Open <small>(3)||Hard||{{flagicon|ESP}} Rafael Nadal||5–7, 6–4, 6–2, 6–7<sup>(5–7)</sup>, 7–5
-|- style="background:#ebc2af;"
-|bgcolor=FFA07A|Runner-up||[[2012 French Open – Men's Singles|2012]]||[[French Open]] <small>(1)||Clay||{{flagicon|ESP}} Rafael Nadal||4–6, 3–6, 6–2, 5–7
-|}
-
-"""
-
-#-------------------------------------------------------#
-#  Function for Trailing Zeroes (need for percentages)  #
-#-------------------------------------------------------#
-
-def trailingZeroes(flt, NumOfDecimalPlaces = 0):
-    n = len(str(flt))
-    i = 1
-    for char in str(flt):
-        if char == '.':
-            break
-        else:
-            i += 1
-    return(str(flt) + '0' * (NumOfDecimalPlaces - n + i))
-
+# coding: utf-8
 #---------------------------------------------------------------------------#
 #  Checks that the Grand Slam singles performance of                        #
 #  professional tennis players on Wikipedia matches their win/loss ratios.  #                               #
@@ -256,11 +10,39 @@ from numpy import *
 OUTCOME = ['1R', '2R', '3R', '4R', 'QF', 'SF', 'F', 'W']
 wins = dict(zip(OUTCOME, range(0,8))) # Gives num of wins for round attained
 
+#------------------------------------------#
+#  Setup the Singles Performance wiki-text #
+#------------------------------------------#
+
+Singles_Performance = haase
+Singles_Performance_List = Singles_Performance.split('\n')
+
+# Sometimes the tables extend to include performance in other tourneys
+# The following will eliminate the wiki-text relating to those subsequent tables
+if Singles_Performance.find('style=text-align:left|Win') > 0:
+    end = Singles_Performance.find('style=text-align:left|Win')
+    Singles_Performance = Singles_Performance[:end]
+
+#--------------------#
+#  Helper Functions  #
+#--------------------#
+
+def trailing_zeroes(flt, AfterDecimalDigits = 0):
+    """ Given a float and a number of digits to show after the decimal,
+    return float as a string with the correct # of digits after the decimal"""
+    i = 0
+    for char in str(flt)[::-1]:
+        if char == '.':
+            break
+        else:
+            i += 1
+    return(str(flt) + '0' * (AfterDecimalDigits - i))
+
 #--------------------------------------------------------------------------#
 #  The following functions work together to construct the win-loss record  #
 #--------------------------------------------------------------------------#
 
-def totalWins(li):
+def total_wins(li):
     """ Given a list of rounds, return the total number of wins"""
     W = 0
     for stage in li:
@@ -269,7 +51,7 @@ def totalWins(li):
         W += wins[stage]
     return(W)
 
-def totalLosses(li):
+def total_losses(li):
     """ Given a list of rounds, return slam losses"""
     L = 0
     for stage in li:
@@ -277,7 +59,7 @@ def totalLosses(li):
             L += 1
     return(L)
 
-def slamWins(li):
+def slam_wins(li):
     """ Given a list of rounds, return slam wins"""
     W = 0
     for stage in li:
@@ -285,25 +67,26 @@ def slamWins(li):
             W += 1
     return(W)
 
-def winLoss(li):
+def win_loss(li):
     """ Given a list of rounds, return win-loss record"""
-    WL = str(totalWins(li)) + '-' + str(totalLosses(li))
+    WL = str(total_wins(li)) + '–' + str(total_losses(li))
     return(WL)
 
-def winLossPct(li):
+def win_loss_pct(li):
     """ Given a list of rounds, return win and loss percentage"""
-    WL = totalWins(li) / (float(totalWins(li)) + totalLosses(li))
+    WL = total_wins(li) / (float(total_wins(li)) + total_losses(li))
     WL = round(WL * 100, 2)
-    return(trailingZeroes(WL,2))
+    return(trailing_zeroes(WL,2))
 
-def slamWinRec(li):
+def slam_win_rec(li):
     """ Given a list of rounds, return slam win-loss record"""
     W = 0
     total = 0
     for stage in li:
         if stage == 'W':
             W += 1
-        total += 1
+        if stage in OUTCOME:
+            total += 1
     slamRec = str(W) + ' / ' + str(total)
     return(slamRec)
     
@@ -312,13 +95,14 @@ def slamWinRec(li):
 #  Build list of slam performance  #
 #----------------------------------#
 
-# The round performance (3R, SF, F, W, etc..) is always the display text of a wiki-link
-# for the individual slam's wiki article.
+# The round performance (3R, SF, F, W, etc..) is always the display text
+# of a wiki-link for the individual slam's wiki article.
 # For example, a 3R finish in the 2009 Australian Open will be displayed as:
 # [[2009 Australian Open - Men's Singles|3R]]
 
 # Builds a list of all instances of display texts of specific slam wiki-links
-perf = re.findall(r"\n\|([A-Z]\w*)|– Men\'s Singles\|\'*([^\]]+)", arod)
+perf = re.findall(r"\n\|([A-Z]\w*)|– Men\'s Singles\|\'*([^\]]+)",
+                  Singles_Performance)
 performance = []
 for tup in perf:
     for string in tup:
@@ -353,29 +137,29 @@ del i
 #--------------------------------#
 
 # This is the grand slam performance table we can visually see on Wikipedia
-perfSlamArray = array(performance).reshape(4,len(performance)/4)
+perf_slam_array = array(performance).reshape(4,len(performance)/4)
 
-perfYearArray = perfSlamArray.transpose()
+perf_year_array = perf_slam_array.transpose()
     
 #---------------------------------------------------------------#
 #  Extract win/loss performance for each slam (AO, RG, W, USO)  #
 #---------------------------------------------------------------#
 
-slamWL = []
-for arr in perfSlamArray:
-    slamWL.append(winLoss(list(arr)))
+slam_WL = []
+for arr in perf_slam_array:
+    slam_WL.append(win_loss(list(arr)))
 
-yearWL = []
-for arr in perfYearArray:
-    yearWL.append(winLoss(list(arr)))
+year_WL = []
+for arr in perf_year_array:
+    year_WL.append(win_loss(list(arr)))
 
-slamPct = []
-for arr in perfSlamArray:
-    slamPct.append(winLossPct(list(arr)))
+slam_pct = []
+for arr in perf_slam_array:
+    slam_pct.append(win_loss_pct(list(arr)))
 
-slamRec = []
-for arr in perfSlamArray:
-    slamRec.append(slamWinRec(list(arr)))
+slam_rec = []
+for arr in perf_slam_array:
+    slam_rec.append(slam_win_rec(list(arr)))
 
 #-------------------------------------------------------------------------#
 #  Extract win/loss aggregate performance for each slam (AO, RG, W, USO)  #
@@ -383,22 +167,107 @@ for arr in perfSlamArray:
 
 # SR total
 W = T = 0
-for arr in perfSlamArray:
-    W += slamWins(list(arr))
-    T += slamWins(list(arr)) + totalLosses(list(arr))
-slamRec_Total = str(W) + ' / ' + str(T)
+for arr in perf_slam_array:
+    W += slam_wins(list(arr))
+    T += slam_wins(list(arr)) + total_losses(list(arr))
+slam_rec_total = str(W) + ' / ' + str(T)
 del W, T
 
 # W-L total (note that W and L are used in next total too)
 W = L = 0
-for arr in perfSlamArray:
-    W += totalWins(list(arr))
-    L += totalLosses(list(arr))
-slamWL_Total = str(W) + '-' + str(L)
+for arr in perf_slam_array:
+    W += total_wins(list(arr))
+    L += total_losses(list(arr))
+slam_WL_total = str(W) + '–' + str(L)
 
 # Win % total (W and L deleted after this total is calculated)
-slamPct_Total = trailingZeroes(round(W / (float(W) + L) * 100, 2), 2)
+slam_pct_total = trailing_zeroes(round(W / (float(W) + L) * 100, 2), 2)
 del W, L  
+
+#--------------------------------------------------------#
+#  Determine if we need SR, W-L, or Win % in wiki-table  #
+#--------------------------------------------------------#
+
+def has_SR(string):
+    match = re.search(r'[\w\]]!![^!S]*SR', string)
+    return(match)
+
+def has_WL(string):
+    match = re.search(r'[\w\]]!![^!S]*W–L', string)
+    return(match)
+
+def has_win_pct(string):
+    match = re.search(r'[\w\]]!![^!S]*Win\s\%', string)
+    return(match)
+
+INC_SR = has_SR(Singles_Performance)
+INC_WL = has_WL(Singles_Performance)
+INC_WIN_PCT = has_win_pct(Singles_Performance)
+
+#---------------------------------------------------#
+#  Build the singles performance substitution list  #
+#---------------------------------------------------#
+
+# Order:
+# (slam_rec, slam_WL, MAYBE slam_pct) * 4,
+# year_WL's, slam_rec_total, slam_WL_total, MAYBE slam_pct_total
+
+stats = []
+for i in range(len(slam_rec)):
+    if INC_SR:
+        stats.append(slam_rec[i])
+    if INC_WL:
+        stats.append(slam_WL[i])
+    if INC_WIN_PCT:
+        stats.append(slam_pct[i])
+for i in range(len(year_WL)):
+    stats.append(year_WL[i])
+del i
+if INC_SR:
+    stats.append(slam_rec_total)
+if INC_WL:
+    stats.append(slam_WL_total)
+if INC_WIN_PCT:
+    stats.append(slam_pct_total)
+
+#-----------------------------------------------------------------------#
+#  Iterate and replace singles performance in Singles_Performance_List  #
+#-----------------------------------------------------------------------#
+
+def is_stat(line):
+    match = re.search(r'\d+\s\/\s\d+|\d+\–\d+|\d+\-\d+|\d+\.\d+', line)
+    return(match)
+
+# DIAGNOSTICS TO RUN IF OUTPUT GETS FUNKY #
+b = -1
+a = 0
+for line in Singles_Performance_List:
+    if is_stat(line):
+        a += 1
+    b += 1
+    print(b, a, is_stat(line), line)
+del b
+del a
+print('this is when the replacements stop: ' + str(len(stats)))
+
+i = 0
+for (index, line) in enumerate(Singles_Performance_List):
+    if i == len(stats):
+        break
+    if is_stat(line):
+        Singles_Performance_List[index] = re.sub(r'(\d+\D+\d+)',
+                                                 stats[i], line)
+        i += 1
+del i
+
+#  Output new, updated string of single's performance  #
+
+Singles_Performance = '\n'.join(Singles_Performance_List)
+
+##open('hithere.txt', 'w')
+##fout = open('hithere.txt', 'w')
+##fout.write(Singles_Performance2)
+
 
 """
 array methods that i'll need:
@@ -414,7 +283,15 @@ array methods that i'll need:
 
 
 """
-IDEAS:
+TODO:
+
+0. String methods to achieve the substitution?
+    Build list with correct ordering of performance scores
+    Split wiki text string by newline
+    For line in whole string
+        if line has score,
+            replace with next performance score
+    
 
 1. Build a dict/structure
     KEYS: AO, FO, W, USO
