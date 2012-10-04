@@ -14,7 +14,7 @@ wins = dict(zip(OUTCOME, range(0,8))) # Gives num of wins for round attained
 #  Setup the Singles Performance wiki-text #
 #------------------------------------------#
 
-Singles_Performance = haase
+Singles_Performance = rochus
 Singles_Performance_List = Singles_Performance.split('\n')
 
 # Sometimes the tables extend to include performance in other tourneys
@@ -101,14 +101,14 @@ def slam_win_rec(li):
 # [[2009 Australian Open - Men's Singles|3R]]
 
 # Builds a list of all instances of display texts of specific slam wiki-links
-perf = re.findall(r"\n\|([A-Z]\w*)|– Men\'s Singles\|\'*([^\]]+)",
+perf = re.findall(r"\n\|([A-Z]\w*)|[-–][^'\n]+'[^\|]+\|'*([^\]]+)",
                   Singles_Performance)
 performance = []
 for tup in perf:
     for string in tup:
         if string:
             performance.append(string)
-del perf
+#del perf
 
 # Unfortunately, some display text is NOT the round performance,
 # so remove all display text with more than 2 characters here:
@@ -266,7 +266,7 @@ Singles_Performance = '\n'.join(Singles_Performance_List)
 
 ##open('hithere.txt', 'w')
 ##fout = open('hithere.txt', 'w')
-##fout.write(Singles_Performance2)
+##fout.write(Singles_Performance)
 
 
 """
