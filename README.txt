@@ -1,5 +1,8 @@
 Building a bot on the english wikipedia to ensure that grand slam performance matches the statistics posted on the article.
 
+See my account page for more info:
+https://en.wikipedia.org/wiki/User:HawkEyeBot
+
 TODO:
 Decide which python bot framework to use
 Start playing with Wikimedia API to query calls to tennis players
