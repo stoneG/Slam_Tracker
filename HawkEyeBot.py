@@ -2,11 +2,13 @@
 
 #-------------------------------------------------------------------------#
 #  Checks that the Grand Slam singles performance of professional tennis  #
-#  players on Wikipedia matches their win/loss ratios.                    #                               #
+#  players on Wikipedia matches their win/loss ratios.                    #
 #-------------------------------------------------------------------------#
 
-import re
 from numpy import *
+import re
+import time
+import wikipedia
 
 #--------------------#
 #  Global Constants  #
@@ -34,13 +36,13 @@ def trailing_zeroes(flt, AfterDecimalDigits = 0):
     return(str(flt) + u'0' * (AfterDecimalDigits - i))
 
 #-----------#
-#  Classes  # 
+#  Classes  #
 #-----------#
 
 class Performance:
     def __init__(self, performance):
         self.performance = performance
-        
+
     def matches_won(self):
         """ Given a list of performance, return the total match wins"""
         wins = 0
@@ -179,19 +181,51 @@ class Career:
         percentage = round(percentage * 100, 2)
         percentage = trailing_zeroes(percentage, 2)
         return(percentage)
-           
+
+##class Player:
+##    def __init__(self, name, text):
+##        self.wiki_text = text
+##        self.name = name
+##
+##    def __str__(self):
+##        return(self.name)
+##
+##    def singles_performance(self):
+##        if self.wiki_text.find('style=text-align:left|Win') > 0:
+##            end = self.wiki_text.find('style=text-align:left|Win')
+##            return(self.wiki_text[:end])
+
+    
+
+    
+
+#-------------------------------#
+#  Get List of Pages to Update  #
+#-------------------------------#
+
+##site = wikipedia.getSite('en', 'hawkeye')
+##page = wikipedia.Page(site, 'List')
+##player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
+
 #------------------------------------------#
 #  Setup the Singles Performance wiki-text #
 #------------------------------------------#
 
-Singles_Performance = djok
-Singles_Performance_List = Singles_Performance.split('\n')
+site = wikipedia.getSite('en', 'hawkeye')
+player = 'Novak Djokovic'
+page = wikipedia.Page(site, player)
+
+Original_Singles_Performance = page.get()
 
 # Sometimes the tables extend to include performance in other tourneys
 # The following will eliminate the wiki-text relating to those subsequent tables
-if Singles_Performance.find('style=text-align:left|Win') > 0:
-    end = Singles_Performance.find('style=text-align:left|Win')
-    Singles_Performance = Singles_Performance[:end]
+if Original_Singles_Performance.find('style=text-align:left|Win') > 0:
+    end = Original_Singles_Performance.find('style=text-align:left|Win')
+    Singles_Performance = Original_Singles_Performance[:end]
+else:
+    Singles_Performance = Original_Singles_Performance
+
+Singles_Performance_List = Singles_Performance.split('\n')
 
 #----------------------------------#
 #  Build list of slam performance  #
@@ -202,15 +236,19 @@ if Singles_Performance.find('style=text-align:left|Win') > 0:
 # For example, a 3R finish in the 2009 Australian Open will be displayed as:
 # [[2009 Australian Open - Men's Singles|3R]]
 
-# Builds a list of all instances of display texts of specific slam wiki-links
-perf = re.findall(ur"\n\|([A-Z]\w?)|[-\u2013][^'\n]+'[^\|\n]+\|'*([^\]]{2})",
-                  Singles_Performance)
+round_performance = re.compile(ur"\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
+
+perf = []
+for line in Singles_Performance_List:
+    match = round_performance.search(line)
+    if match:
+        perf.append(match.groups())
+
 performance = []
 for tup in perf:
     for string in tup:
         if string:
-            performance.append(string)
-del perf
+            performance.append(string)    
 
 # Add in empty strings for yet to be played slams in current year
 if len(performance) % 4:
@@ -222,6 +260,15 @@ while i < UNPLAYED:
     performance.append('')
     i += 1
 del i
+
+#--------------------------------#
+#  Build arrays of performances  #
+#--------------------------------#
+
+# This is the grand slam performance table we can visually see on Wikipedia
+perf_slam_array = array(performance).reshape(4,len(performance)/4)
+
+perf_year_array = perf_slam_array.transpose()
 
 #--------------------------------------------------------#
 #  Determine if we need SR, W-L, or Win % in wiki-table  #
@@ -275,8 +322,10 @@ if INC_MATCH_PERCENTAGE:
 #  Iterate and replace singles performance in Singles_Performance_List  #
 #-----------------------------------------------------------------------#
 
+stat = re.compile(ur'[!\|]\d+\s\/\s\d+$|[!\|]\d+\-\d+$|[!\|]\d+\u2013\d+$|[!\|]\d+\.\d+$')
+
 def is_stat(line):
-    match = re.search(ur'\d+\s\/\s\d+|\d+\-\d+|\d+\u2013\d+|\d+\.\d+', line)
+    match = stat.search(line)
     return(match)
 
 i = 0
@@ -289,8 +338,30 @@ for (index, line) in enumerate(Singles_Performance_List):
         i += 1
 del i
 
+#------------------------------------------------------#
 #  Output new, updated string of single's performance  #
+#------------------------------------------------------#
 
-Singles_Performance = '\n'.join(Singles_Performance_List)
+HawkEyed_Singles_Performance = '\n'.join(Singles_Performance_List)
 
-Singles_Performance # For now, paste me into wiki-text edit box!
+page = wikipedia.Page(site, '%s %s' % (player, '(hawkeyed)'))
+
+timestamp = u"\n<!-- HawkEyeBot last run at %H:%M:%S (UTC) on %d %b, %Y -->"
+currenttime = time.strftime(timestamp, time.gmtime())
+
+def runtime():
+    global HawkEyed_Singles_Performance
+    comment = re.compile(ur"\n<!--\sHawkEyeBot\slast[^-]+-->")
+    if comment.search(HawkEyed_Singles_Performance):
+        HawkEyed_Singles_Performance = re.sub(ur"\n<!--\sHawkEyeBot\slast[^-]+-->"
+                                              , currenttime
+                                              , HawkEyed_Singles_Performance)
+    else:
+        HawkEyed_Singles_Performance = HawkEyed_Singles_Performance + currenttime
+
+if Original_Singles_Performance == HawkEyed_Singles_Performance:
+    runtime()
+    page.put(Hawkeyed_Singles_Performance, '*clap* *clap* *clap* *clap* hawk-eye confirms the call!')
+else:
+    runtime()
+    page.put(Hawkeyed_Singles_Performance, '*clap* *clap* *clap* *clap* hawk-eye overturns the call!')
