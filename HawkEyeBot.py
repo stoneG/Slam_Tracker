@@ -1,9 +1,10 @@
 # coding: utf-8
 
-#-------------------------------------------------------------------------#
-#  Checks that the Grand Slam singles performance of professional tennis  #
-#  players on Wikipedia matches their win/loss ratios.                    #
-#-------------------------------------------------------------------------#
+#-----------------------------------------------------------------#
+#  HawkEyeBot checks that the Grand Slam singles performance of   #
+#  professional tennis players on Wikipedia corresponds to their  #
+#  win/loss ratios.                                               #
+#-----------------------------------------------------------------#
 
 from numpy import *
 import re
@@ -182,186 +183,199 @@ class Career:
         percentage = trailing_zeroes(percentage, 2)
         return(percentage)
 
-##class Player:
-##    def __init__(self, name, text):
-##        self.wiki_text = text
-##        self.name = name
-##
-##    def __str__(self):
-##        return(self.name)
-##
-##    def singles_performance(self):
-##        if self.wiki_text.find('style=text-align:left|Win') > 0:
-##            end = self.wiki_text.find('style=text-align:left|Win')
-##            return(self.wiki_text[:end])
+class Player:
+    def __init__(self, name, text):
+        self.wiki_text = text
+        self.name = name
 
+    def __str__(self):
+        return(self.name)
+
+    def singles_performance(self):
+        """Sometimes the tables extend to include performance in other tourneys.
+           The following will eliminate the wiki-text relating to those
+           subsequent tables     
+        """
+        if self.wiki_text.find('style=text-align:left|Win') > 0:
+            end = self.wiki_text.find('style=text-align:left|Win')
+            return(self.wiki_text[:end])
+        else:
+            return(self.wiki_text)
+
+    def singles_performance_list(self):
+        return(self.singles_performance().split('\n'))
     
-
+    # The round performance (3R, SF, F, W, etc..) is always the display text
+    # of a wiki-link for the individual slam's wiki article.
+    # For example, a 3R finish in the 2009 Australian Open will be displayed as:
+    # [[2009 Australian Open - Men's Singles|3R]]
     
+    def performance(self):
+        pat = re.compile(ur"\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
 
-#-------------------------------#
-#  Get List of Pages to Update  #
-#-------------------------------#
+        # Build list of tuples of matches
+        perf = []
+        for line in self.singles_performance_list():
+            match = pat.search(line)
+            if match:
+                perf.append(match.groups())
 
-##site = wikipedia.getSite('en', 'hawkeye')
-##page = wikipedia.Page(site, 'List')
-##player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
+        # Break down tuples and discard empty strings
+        performance = []
+        for tup in perf:
+            for string in tup:
+                if string:
+                    performance.append(string)
+                    
+        # Find how many slams are unplayed
+        if len(performance) % 4:
+            unplayed = 4 - len(performance) % 4
+        else:
+            unplayed = 0
 
-#------------------------------------------#
-#  Setup the Singles Performance wiki-text #
-#------------------------------------------#
+        # How many years of slams have been played
+        years = (unplayed + len(performance)) / 4
 
-site = wikipedia.getSite('en', 'hawkeye')
-player = 'Novak Djokovic'
-page = wikipedia.Page(site, player)
+        # Add in empty strings for yet to be played slams in current year
+        if unplayed > 0:
+            insert = [2 * year - 1]
+            i = 1
+            while i < unplayed:
+                insert.append(insert[-1] + year)
+                i += 1
+            for index in insert:
+                performance.insert(index, ' ')
 
-Original_Singles_Performance = page.get()
+        return(performance)
 
-# Sometimes the tables extend to include performance in other tourneys
-# The following will eliminate the wiki-text relating to those subsequent tables
-if Original_Singles_Performance.find('style=text-align:left|Win') > 0:
-    end = Original_Singles_Performance.find('style=text-align:left|Win')
-    Singles_Performance = Original_Singles_Performance[:end]
-else:
-    Singles_Performance = Original_Singles_Performance
+    #  Determine if we need SR, W-L, or Win % in wiki-table
+    def has_championship_record(self):
+        match = re.search(r'[\w\]]!![^!S]*SR', self.wiki_text)
+        return(match)
 
-Singles_Performance_List = Singles_Performance.split('\n')
+    def has_match_record(self):
+        match = re.search(ur'[\w\]]!![^!S]*W(-|\u2013)L', self.wiki_text)
+        return(match)
 
-#----------------------------------#
-#  Build list of slam performance  #
-#----------------------------------#
+    def has_match_percentage(self):
+        match = re.search(r'[\w\]]!![^!S]*Win\s\%', self.wiki_text)
+        return(match)
 
-# The round performance (3R, SF, F, W, etc..) is always the display text
-# of a wiki-link for the individual slam's wiki article.
-# For example, a 3R finish in the 2009 Australian Open will be displayed as:
-# [[2009 Australian Open - Men's Singles|3R]]
+    # This is the grand slam performance table we can visually see on Wikipedia
+    def performance_slam_array(self):
+        columns = len(self.performance())/4
+        return(array(self.performance()).reshape(4, columns))
 
-round_performance = re.compile(ur"\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
+    def performance_year_array(self):
+        return(self.performance_slam_array().transpose())
 
-perf = []
-for line in Singles_Performance_List:
-    match = round_performance.search(line)
-    if match:
-        perf.append(match.groups())
+#-----------------------------------#
+#  Regular Expressions and Strings  #
+#-----------------------------------#
 
-performance = []
-for tup in perf:
-    for string in tup:
-        if string:
-            performance.append(string)    
+# Building the stat finding regular expressions
+championship_record_re = ur'[!\|]\d+\s\/\s\d+$'
+match_record_one_re = ur'[!\|]\d+\-\d+$'        # regular dash
+match_record_two_re = ur'[!\|]\d+\u2013\d+$'    # em-dash
+match_percentage_re = ur'[!\|]\d+\.\d+$'
 
-# Add in empty strings for yet to be played slams in current year
-if len(performance) % 4:
-    UNPLAYED = 4 - len(performance) % 4
-else:
-    UNPLAYED = 0
-i = 0
-while i < UNPLAYED:
-    performance.append('')
-    i += 1
-del i
+stat = re.compile(ur'|'.join([championship_record_re
+                              , match_record_one_re
+                              , match_record_two_re
+                              , match_percentage_re]))
 
-#--------------------------------#
-#  Build arrays of performances  #
-#--------------------------------#
+# Build timestamp comment
+timestamp = u"\n<!-- HawkEyeBot last run at %H:%M:%S (UTC) on %d %b, %Y -->"
+currenttime = time.strftime(timestamp, time.gmtime())
 
-# This is the grand slam performance table we can visually see on Wikipedia
-perf_slam_array = array(performance).reshape(4,len(performance)/4)
+# HawkEyeBot edit messages
+changed_stats_msg = '*clap* *clap* *clap* *clap* hawk-eye overturns the call!'
+unchanged_stats_msg = '*clap* *clap* *clap* *clap* hawk-eye confirms the call!'
 
-perf_year_array = perf_slam_array.transpose()
-
-#--------------------------------------------------------#
-#  Determine if we need SR, W-L, or Win % in wiki-table  #
-#--------------------------------------------------------#
-
-def has_championship_record(string):
-    match = re.search(r'[\w\]]!![^!S]*SR', string)
-    return(match)
-
-def has_match_record(string):
-    match = re.search(ur'[\w\]]!![^!S]*W(-|\u2013)L', string)
-    return(match)
-
-def has_match_percentage(string):
-    match = re.search(r'[\w\]]!![^!S]*Win\s\%', string)
-    return(match)
-
-INC_CHAMPIONSHIP_RECORD = has_championship_record(Singles_Performance)
-INC_MATCH_RECORD = has_match_record(Singles_Performance)
-INC_MATCH_PERCENTAGE = has_match_percentage(Singles_Performance)
-
-#---------------------------------------------------#
-#  Build the singles performance substitution list  #
-#---------------------------------------------------#
-
-career = Career(perf_slam_array, perf_year_array)
-
-# Order:
-# (slam_rec, slam_WL, MAYBE slam_pct) * 4,
-# year_WL's, slam_rec_total, slam_WL_total, MAYBE slam_pct_total
-
-stats = []
-for i in range(len(career.championships_by_slam())):
-    if INC_CHAMPIONSHIP_RECORD:
-        stats.append(career.championships_by_slam()[i])
-    if INC_MATCH_RECORD:
-        stats.append(career.match_records_by_slam()[i])
-    if INC_MATCH_PERCENTAGE:
-        stats.append(career.match_percentage_by_slam()[i])
-for i in range(len(career.match_records_by_year())):
-    stats.append(career.match_records_by_year()[i])
-del i
-if INC_CHAMPIONSHIP_RECORD:
-    stats.append(career.championship_record())
-if INC_MATCH_RECORD:
-    stats.append(career.match_record())
-if INC_MATCH_PERCENTAGE:
-    stats.append(career.match_percentage())
-
-#-----------------------------------------------------------------------#
-#  Iterate and replace singles performance in Singles_Performance_List  #
-#-----------------------------------------------------------------------#
-
-stat = re.compile(ur'[!\|]\d+\s\/\s\d+$|[!\|]\d+\-\d+$|[!\|]\d+\u2013\d+$|[!\|]\d+\.\d+$')
+#-------------#
+#  Functions  #
+#-------------#
 
 def is_stat(line):
     match = stat.search(line)
     return(match)
 
-i = 0
-for (index, line) in enumerate(Singles_Performance_List):
-    if i == len(stats):
-        break
-    if is_stat(line):
-        Singles_Performance_List[index] = re.sub(ur'(\d+\D+\d+)',
-                                                 stats[i], line)
-        i += 1
-del i
-
-#------------------------------------------------------#
-#  Output new, updated string of single's performance  #
-#------------------------------------------------------#
-
-HawkEyed_Singles_Performance = '\n'.join(Singles_Performance_List)
-
-page = wikipedia.Page(site, '%s %s' % (player, '(hawkeyed)'))
-
-timestamp = u"\n<!-- HawkEyeBot last run at %H:%M:%S (UTC) on %d %b, %Y -->"
-currenttime = time.strftime(timestamp, time.gmtime())
-
-def runtime():
-    global HawkEyed_Singles_Performance
+def runtime(new_singles_performance):
     comment = re.compile(ur"\n<!--\sHawkEyeBot\slast[^-]+-->")
-    if comment.search(HawkEyed_Singles_Performance):
-        HawkEyed_Singles_Performance = re.sub(ur"\n<!--\sHawkEyeBot\slast[^-]+-->"
+    if comment.search(new_singles_performance):
+        new_singles_performance = re.sub(ur"\n<!--\sHawkEyeBot\slast[^-]+-->"
                                               , currenttime
-                                              , HawkEyed_Singles_Performance)
+                                              , new_singles_performance)
     else:
-        HawkEyed_Singles_Performance = HawkEyed_Singles_Performance + currenttime
+        new_singles_performance = new_singles_performance + currenttime
+    return(new_singles_performance)
 
-if Original_Singles_Performance == HawkEyed_Singles_Performance:
-    runtime()
-    page.put(Hawkeyed_Singles_Performance, '*clap* *clap* *clap* *clap* hawk-eye confirms the call!')
-else:
-    runtime()
-    page.put(Hawkeyed_Singles_Performance, '*clap* *clap* *clap* *clap* hawk-eye overturns the call!')
+def update_page():
+    if Original_Singles_Performance == New_Singles_Performance:
+        page.put(runtime(New_Singles_Performance), unchanged_stats_msg)
+    else:
+        page.put(runtime(New_Singles_Performance), changed_stats_msg)
+
+#-------------------------------#
+#  Get List of Pages to Update  #
+#-------------------------------#
+
+site = wikipedia.getSite('en', 'hawkeye')
+page = wikipedia.Page(site, 'List')
+player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
+
+#------------------#
+#  Run HawkEyeBot  #
+#------------------#
+
+for name in player_list:
+
+    # Get page text and setup objects
+    page = wikipedia.Page(site, name)
+    Original_Singles_Performance = page.get()
+    player = Player(name, Original_Singles_Performance)
+    career = Career(player.performance_slam_array()
+                    , player.performance_year_array())
+    
+    # Making the list of statistics to go in the Singles Performance Timeline
+    stats = []
+    for i in range(len(career.championships_by_slam())):
+        if player.has_championship_record():
+            stats.append(career.championships_by_slam()[i])
+        if player.has_match_record():
+            stats.append(career.match_records_by_slam()[i])
+        if player.has_match_percentage():
+            stats.append(career.match_percentage_by_slam()[i])
+    for each in career.match_records_by_year():
+        stats.append(each)
+    if player.has_championship_record():
+        stats.append(career.championship_record())
+    if player.has_match_record():
+        stats.append(career.match_record())
+    if player.has_match_percentage():
+        stats.append(career.match_percentage())
+
+    # List of lines from Original_Singles_Performance
+    Singles_Performance_List = Original_Singles_Performance.split('\n')
+
+    # Find and replace stats in Singles_Performance_List
+    i = 0
+    for (index, line) in enumerate(Singles_Performance_List):
+        if i == len(stats):
+            break
+        if is_stat(line):
+            Singles_Performance_List[index] = re.sub(ur'(\d+\D+\d+)',
+                                                     stats[i], line)
+            i += 1
+    del i
+
+    # Reassemble list into string
+    New_Singles_Performance = '\n'.join(Singles_Performance_List)
+
+    update_page()
+
+    print('\nFinished updating page for %s' % name)
+    print('Sleeping for 2s\n')
+    time.sleep(2)
+
+# fin
