@@ -289,8 +289,8 @@ timestamp = u"\n<!-- HawkEyeBot last run at %H:%M:%S (UTC) on %d %b, %Y -->"
 currenttime = time.strftime(timestamp, time.gmtime())
 
 # HawkEyeBot edit messages
-changed_stats_msg = '*clap* *clap* *clap* *clap* hawk-eye overturns the call!'
-unchanged_stats_msg = '*clap* *clap* *clap* *clap* hawk-eye confirms the call!'
+changed_stats_msg = 'Hawk-Eye overturned the statistics in this article!'
+unchanged_stats_msg = 'Hawk-Eye confirms the statistics in this article!'
 
 #-------------#
 #  Functions  #
