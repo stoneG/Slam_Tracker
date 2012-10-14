@@ -204,12 +204,12 @@ class Player:
 
     def singles_performance_list(self):
         return(self.singles_performance().split('\n'))
-    
+
     # The round performance (3R, SF, F, W, etc..) is always the display text
     # of a wiki-link for the individual slam's wiki article.
     # For example, a 3R finish in the 2009 Australian Open will be displayed as:
     # [[2009 Australian Open - Men's Singles|3R]]
-    
+
     def performance(self):
         pat = re.compile(ur"\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
 
@@ -226,7 +226,7 @@ class Player:
             for string in tup:
                 if string:
                     performance.append(string)
-                    
+
         # Find how many slams are unplayed
         if len(performance) % 4:
             unplayed = 4 - len(performance) % 4
@@ -289,8 +289,8 @@ timestamp = u"\n<!-- HawkEyeBot last run at %H:%M:%S (UTC) on %d %b, %Y -->"
 currenttime = time.strftime(timestamp, time.gmtime())
 
 # HawkEyeBot edit messages
-changed_stats_msg = 'Hawk-Eye overturned the statistics in this article!'
-unchanged_stats_msg = 'Hawk-Eye confirms the statistics in this article!'
+changed_stats_msg = 'Corrected statistics in the Singles Performance Timeline and updated timestamp for this run. Concerns/suggestions? See [[User talk:HawkEyeBot]].'
+unchanged_stats_msg = "Statistics in the Singles Performance Timeline are correct. Updated timestamp for this run. Concerns/suggestions? See [[User talk:HawkEyeBot]]."
 
 #-------------#
 #  Functions  #
