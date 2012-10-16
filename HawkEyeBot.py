@@ -41,6 +41,7 @@ def trailing_zeroes(flt, AfterDecimalDigits = 0):
 #-----------#
 
 class Performance:
+    " Initialized with a list of round performances."
     def __init__(self, performance):
         self.performance = performance
 
@@ -50,8 +51,6 @@ class Performance:
         for round_attained in self.performance:
             if round_attained in ROUNDS:
                 wins += wins_for[round_attained]
-            else:
-                continue
         return(wins)
 
     def matches_lost(self):
@@ -182,6 +181,8 @@ class Career:
         percentage = round(percentage * 100, 2)
         percentage = trailing_zeroes(percentage, 2)
         return(percentage)
+            stats.append(career.match_percentage())
+
 
 class Player:
     def __init__(self, name, text):
@@ -194,7 +195,7 @@ class Player:
     def singles_performance(self):
         """Sometimes the tables extend to include performance in other tourneys.
            The following will eliminate the wiki-text relating to those
-           subsequent tables     
+           subsequent tables
         """
         if self.wiki_text.find('style=text-align:left|Win') > 0:
             end = self.wiki_text.find('style=text-align:left|Win')
@@ -316,6 +317,35 @@ def update_page():
     else:
         page.put(runtime(New_Singles_Performance), changed_stats_msg)
 
+def statistics():
+    " Build list of grand slam statistics in the order of appearance in wiki-text"
+    stats = []
+
+    for i in range(len(career.championships_by_slam())):
+
+        if player.has_championship_record():
+            stats.append(career.championships_by_slam()[i])
+
+        if player.has_match_record():
+            stats.append(career.match_records_by_slam()[i])
+
+        if player.has_match_percentage():
+            stats.append(career.match_percentage_by_slam()[i])
+
+    for each in career.match_records_by_year():
+        stats.append(each)
+
+    if player.has_championship_record():
+        stats.append(career.championship_record())
+
+    if player.has_match_record():
+        stats.append(career.match_record())
+
+    if player.has_match_percentage():
+        stats.append(career.match_percentage())
+
+    return(stats)
+
 #-------------------------------#
 #  Get List of Pages to Update  #
 #-------------------------------#
@@ -336,24 +366,9 @@ for name in player_list:
     player = Player(name, Original_Singles_Performance)
     career = Career(player.performance_slam_array()
                     , player.performance_year_array())
-    
+
     # Making the list of statistics to go in the Singles Performance Timeline
-    stats = []
-    for i in range(len(career.championships_by_slam())):
-        if player.has_championship_record():
-            stats.append(career.championships_by_slam()[i])
-        if player.has_match_record():
-            stats.append(career.match_records_by_slam()[i])
-        if player.has_match_percentage():
-            stats.append(career.match_percentage_by_slam()[i])
-    for each in career.match_records_by_year():
-        stats.append(each)
-    if player.has_championship_record():
-        stats.append(career.championship_record())
-    if player.has_match_record():
-        stats.append(career.match_record())
-    if player.has_match_percentage():
-        stats.append(career.match_percentage())
+    stats = statistics()
 
     # List of lines from Original_Singles_Performance
     Singles_Performance_List = Original_Singles_Performance.split('\n')
@@ -372,10 +387,12 @@ for name in player_list:
     # Reassemble list into string
     New_Singles_Performance = '\n'.join(Singles_Performance_List)
 
+    # Send and update player's article on Wikipedia
     update_page()
 
+    # Note completion and sleep
     print('\nFinished updating page for %s' % name)
-    print('Sleeping for 2s\n')
-    time.sleep(2)
+    print('Sleeping for 1s\n')
+    time.sleep(1)
 
 # fin
