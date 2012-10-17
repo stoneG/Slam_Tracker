@@ -360,14 +360,15 @@ player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
 
 for name in player_list:
 
-    # Get page text and setup objects
+    # Get a player's wiki text and instantiate objects relating to them
     page = wikipedia.Page(site, name)
     Original_Singles_Performance = page.get()
     player = Player(name, Original_Singles_Performance)
     career = Career(player.performance_slam_array()
                     , player.performance_year_array())
 
-    # Making the list of statistics to go in the Singles Performance Timeline
+    # Constructing the correct list of statistics to go in the Singles Performance Timeline
+    # This may or may not differ from the statistics currently in the page
     stats = statistics()
 
     # List of lines from Original_Singles_Performance
