@@ -11,6 +11,10 @@ import re
 import time
 import wikipedia
 
+# Open file for printing during runs.
+
+fo = open("trial-run.txt", "rw+")
+
 #--------------------#
 #  Global Constants  #
 #--------------------#
@@ -409,5 +413,7 @@ for name in player_list:
     print(player.performance_slam_array())
     #print('Sleeping for 1s\n')
     #time.sleep(1)
+
+fo.close()
 
 # fin
