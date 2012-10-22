@@ -238,13 +238,14 @@ class Player:
 
         # Add in empty strings for yet to be played slams in current year
         if unplayed > 0:
-            insert = [4 * years - 1]
+            ins = [4 * years - 1]
             i = 1
             while i < unplayed:
-                insert.append(insert[-1] + years)
+                ins.append(ins[-1] - years)
                 i += 1
-            for index in insert:
-                performance.insert(index, ' ')
+            ins.reverse()
+            for index in ins:
+                performance.ins(index, ' ')
 
         return(performance)
 
@@ -396,7 +397,7 @@ for name in player_list:
 
     # Note completion and sleep
     print('\nFinished updating page for %s' % name)
-    print('Sleeping for 1s\n')
-    time.sleep(1)
+    #print('Sleeping for 1s\n')
+    #time.sleep(1)
 
 # fin
