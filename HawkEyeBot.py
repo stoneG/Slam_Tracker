@@ -181,7 +181,6 @@ class Career:
         percentage = round(percentage * 100, 2)
         percentage = trailing_zeroes(percentage, 2)
         return(percentage)
-            stats.append(career.match_percentage())
 
 
 class Player:
@@ -239,10 +238,10 @@ class Player:
 
         # Add in empty strings for yet to be played slams in current year
         if unplayed > 0:
-            insert = [2 * year - 1]
+            insert = [4 * years - 1]
             i = 1
             while i < unplayed:
-                insert.append(insert[-1] + year)
+                insert.append(insert[-1] + years)
                 i += 1
             for index in insert:
                 performance.insert(index, ' ')
@@ -350,9 +349,11 @@ def statistics():
 #  Get List of Pages to Update  #
 #-------------------------------#
 
-site = wikipedia.getSite('en', 'hawkeye')
-page = wikipedia.Page(site, 'List')
+site = wikipedia.getSite('en', 'wikipedia')
+page = wikipedia.Page(site, 'User:HawkEyeBot/Player_List')
 player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
+for name in player_list:
+    page = wikipedia.Page(site, name)
 
 #------------------#
 #  Run HawkEyeBot  #
@@ -362,7 +363,9 @@ for name in player_list:
 
     # Get a player's wiki text and instantiate objects relating to them
     page = wikipedia.Page(site, name)
-    Original_Singles_Performance = page.get()
+    if page.isRedirectPage():
+        page = page.getRedirectTarget()
+    Original_Singles_Performance = page.get() 
     player = Player(name, Original_Singles_Performance)
     career = Career(player.performance_slam_array()
                     , player.performance_year_array())
@@ -371,7 +374,7 @@ for name in player_list:
     # This may or may not differ from the statistics currently in the page
     stats = statistics()
 
-    # List of lines from Original_Singles_Performance
+    # Split the wiki text by lines
     Singles_Performance_List = Original_Singles_Performance.split('\n')
 
     # Find and replace stats in Singles_Performance_List
@@ -389,7 +392,7 @@ for name in player_list:
     New_Singles_Performance = '\n'.join(Singles_Performance_List)
 
     # Send and update player's article on Wikipedia
-    update_page()
+    #update_page()
 
     # Note completion and sleep
     print('\nFinished updating page for %s' % name)
