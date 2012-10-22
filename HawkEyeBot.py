@@ -366,6 +366,11 @@ player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
 
 for name in player_list:
 
+    # If player doesn't exist
+    if not page.exists():
+        print(name, 'has no article')
+        continue
+        
     # Get a player's wiki text and instantiate objects relating to them
     page = wikipedia.Page(site, name)
     if page.isRedirectPage():
@@ -401,6 +406,7 @@ for name in player_list:
 
     # Note completion and sleep
     print('\nFinished updating page for %s' % name)
+    print(player.performance_slam_array())
     #print('Sleeping for 1s\n')
     #time.sleep(1)
 
