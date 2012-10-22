@@ -88,7 +88,10 @@ class Performance:
 
     def match_percentage(self):
         """ Given a list of performance, return win and loss percentage"""
-        percentage = self.matches_won() / float(self.matches_played())
+        if self.matches_played() == 0:
+            percentage = 0
+        else:
+            percentage = self.matches_won() / float(self.matches_played())
         percentage = round(percentage * 100, 2)
         percentage = trailing_zeroes(percentage, 2)
         return(percentage)
@@ -177,7 +180,10 @@ class Career:
         return(str(self.matches_won()) + u'\u2013' + str(self.matches_lost()))
 
     def match_percentage(self):
-        percentage = self.matches_won() / float(self.matches_played())
+        if self.matches_played() == 0:
+            percentage = 0
+        else:
+            percentage = self.matches_won() / float(self.matches_played())
         percentage = round(percentage * 100, 2)
         percentage = trailing_zeroes(percentage, 2)
         return(percentage)
@@ -245,21 +251,21 @@ class Player:
                 i += 1
             ins.reverse()
             for index in ins:
-                performance.ins(index, ' ')
+                performance.insert(index, ' ')
 
         return(performance)
 
     #  Determine if we need SR, W-L, or Win % in wiki-table
     def has_championship_record(self):
-        match = re.search(r'[\w\]]!![^!S]*SR', self.wiki_text)
+        match = re.search(r'\d{4}[^\n]+[\w\]]!![^!S]*SR', self.wiki_text)
         return(match)
 
     def has_match_record(self):
-        match = re.search(ur'[\w\]]!![^!S]*W(-|\u2013)L', self.wiki_text)
+        match = re.search(ur'\d{4}[^\n]+[\w\]]!![^!S]*W(-|\u2013)L', self.wiki_text)
         return(match)
 
     def has_match_percentage(self):
-        match = re.search(r'[\w\]]!![^!S]*Win\s\%', self.wiki_text)
+        match = re.search(r'\d{4}[^\n]+[\w\]]!![^!S]*Win\s\%', self.wiki_text)
         return(match)
 
     # This is the grand slam performance table we can visually see on Wikipedia
@@ -353,8 +359,6 @@ def statistics():
 site = wikipedia.getSite('en', 'wikipedia')
 page = wikipedia.Page(site, 'User:HawkEyeBot/Player_List')
 player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
-for name in player_list:
-    page = wikipedia.Page(site, name)
 
 #------------------#
 #  Run HawkEyeBot  #
