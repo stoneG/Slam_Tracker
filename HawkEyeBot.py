@@ -322,7 +322,8 @@ def runtime(new_singles_performance):
     return(new_singles_performance)
 
 def update_page():
-    if Original_Singles_Performance == New_Singles_Performance:
+    is_unchanged = Original_Singles_Performance == New_Singles_Performance
+    if is_unchanged:
         page.put(runtime(New_Singles_Performance), unchanged_stats_msg)
     else:
         page.put(runtime(New_Singles_Performance), changed_stats_msg)
@@ -370,15 +371,27 @@ player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
 
 for name in player_list:
 
-    # If player doesn't exist
+    # Instantiate player page
     page = wikipedia.Page(site, name)
+
+    # Exceptions
     if not page.exists():
         error = '%s has no article' % name
         print(error)
         fo.write(error.encode('utf-8'))
         continue
+
+    if not page.canBeEdited():
+        error = '%s is protected and cannot be edited' % name
+        print(error)
+        fo.write(error.encode('utf-8'))
+
+    if not page.botMayEdit():
+        error = '%s may not be edited by HawkEyeBot' % name
+        print(error)
+        fo.write(error.encode('utf-8'))
         
-    # Get a player's wiki text and instantiate objects relating to them
+    # Instantiate other objects
     if page.isRedirectPage():
         page = page.getRedirectTarget()
     Original_Singles_Performance = page.get() 
@@ -408,7 +421,7 @@ for name in player_list:
     New_Singles_Performance = '\n'.join(Singles_Performance_List)
 
     # Send and update player's article on Wikipedia
-    #update_page()
+    update_page()
 
     # Note completion and sleep
     finish = '\n\nFinished updating page for %s\n' % name
