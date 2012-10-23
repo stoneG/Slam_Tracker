@@ -25,10 +25,13 @@ ROUNDS = ['1R', '2R', '3R', '4R', 'QF', 'SF', 'F', 'W']
 
 wins_for = dict(zip(ROUNDS, range(0,8))) # Gives num of wins for round attained
 
+# TODO: put all regex's here #
+
 #--------------------#
 #  Helper Functions  #
 #--------------------#
 
+# TODO: replace this with precision #
 def trailing_zeroes(flt, AfterDecimalDigits = 0):
     """ Given a float and a number of digits to show after the decimal,
     return float as a string with the correct # of digits after the decimal"""
@@ -221,7 +224,7 @@ class Player:
     # [[2009 Australian Open - Men's Singles|3R]]
 
     def performance(self):
-        pat = re.compile(ur"\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
+        pat = re.compile(ur"\|(\dR)$|\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
 
         # Build list of tuples of matches
         perf = []
