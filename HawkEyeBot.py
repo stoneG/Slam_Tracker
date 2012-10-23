@@ -224,7 +224,7 @@ class Player:
     # [[2009 Australian Open - Men's Singles|3R]]
 
     def performance(self):
-        pat = re.compile(ur"\|(\dR)$|\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
+        pat = re.compile(ur"(\|)$|\|(\dR)$|\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
 
         # Build list of tuples of matches
         perf = []
