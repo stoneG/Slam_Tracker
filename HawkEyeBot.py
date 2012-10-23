@@ -373,8 +373,9 @@ for name in player_list:
     # If player doesn't exist
     page = wikipedia.Page(site, name)
     if not page.exists():
-        print(name, 'has no article')
-        fo.write(name, 'has no article\n')
+        error = '%s has no article' % name
+        print(error)
+        fo.write(error.encode('utf-8'))
         continue
         
     # Get a player's wiki text and instantiate objects relating to them
