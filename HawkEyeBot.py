@@ -13,7 +13,7 @@ import wikipedia
 
 # Open file for printing during runs.
 
-fo = open("trial-run.txt", "rw+")
+fo = open("trial-run.txt", "w")
 
 #--------------------#
 #  Global Constants  #
@@ -371,12 +371,13 @@ player_list = re.findall(ur'\*\s([^\n]+)\n', page.get())
 for name in player_list:
 
     # If player doesn't exist
+    page = wikipedia.Page(site, name)
     if not page.exists():
         print(name, 'has no article')
+        fo.write(name, 'has no article\n')
         continue
         
     # Get a player's wiki text and instantiate objects relating to them
-    page = wikipedia.Page(site, name)
     if page.isRedirectPage():
         page = page.getRedirectTarget()
     Original_Singles_Performance = page.get() 
@@ -409,8 +410,19 @@ for name in player_list:
     #update_page()
 
     # Note completion and sleep
-    print('\nFinished updating page for %s' % name)
-    print(player.performance_slam_array())
+    finish = '\n\nFinished updating page for %s\n' % name
+    print(finish.encode('utf-8'))
+    fo.write(finish.encode('utf-8'))
+    fo.write('\nSingles Performance Timeline:\n')
+    for li in player.performance_slam_array():
+        for elem in li:
+            fo.write(elem.encode('utf-8'))
+            fo.write(' ')
+        fo.write('\n')
+    fo.write('\nStatistics:\n')
+    for elem in stats:
+        fo.write(elem.encode('utf-8'))
+        fo.write(' ')
     #print('Sleeping for 1s\n')
     #time.sleep(1)
 
