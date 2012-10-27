@@ -224,7 +224,7 @@ class Player:
     # [[2009 Australian Open - Men's Singles|3R]]
 
     def performance(self):
-        pat = re.compile(ur"(\|)$|\|(\dR)$|\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
+        pat = re.compile(ur"^(\|)$|\|(\dR)$|\|([A-Z]\w?)$|[-\u2013][^']+'[^\|]+\|'*([^'\]][^'\]]?)\]\]$")
 
         # Build list of tuples of matches
         perf = []
@@ -379,21 +379,23 @@ for name in player_list:
 
     # Exceptions
     if not page.exists():
-        error = '%s has no article' % name
+        error = '\n%s has no article' % name
         print(error)
         fo.write(error.encode('utf-8'))
         continue
 
     if not page.canBeEdited():
-        error = '%s is protected and cannot be edited' % name
+        error = '\n%s is protected and cannot be edited' % name
         print(error)
         fo.write(error.encode('utf-8'))
+        continue
 
-    if not page.botMayEdit():
-        error = '%s may not be edited by HawkEyeBot' % name
+    if not page.botMayEdit('HawkEyeBot'):
+        error = '\n%s may not be edited by HawkEyeBot' % name
         print(error)
         fo.write(error.encode('utf-8'))
-        
+        continue
+
     # Instantiate other objects
     if page.isRedirectPage():
         page = page.getRedirectTarget()
